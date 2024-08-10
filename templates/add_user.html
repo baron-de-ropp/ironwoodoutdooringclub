@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="main-content">
+    <h1>Add New User</h1>
+    <a href="{{ url_for('admin') }}" class="primary">Return to Admin Dashboard</a>
+    <form method="POST" id="addUserForm">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required>
+        <label for="role">Role</label>
+        <select name="role" id="role" required>
+            <option value="normal">Normal</option>
+            <option value="elevated">Elevated</option>
+        </select>
+        <button type="submit" class="primary" id="addUserButton">Add User</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</section>
+
+<script>
+document.getElementById('addUserForm').addEventListener('submit', function() {
+    document.getElementById('addUserButton').disabled = true;
+    document.getElementById('addUserButton').innerText = 'Adding...';
+});
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="main-content">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ current_user.username }}{% if current_user.is_elevated() %} ({{ current_user.role }}){% endif %}!</p>
+    
+    {% if current_user.is_elevated() %}
+    <h2>Manage Users</h2>
+    <p>Here you can manage users of the Ironwood Outdooring Club.</p>
+    <ul>
+        <li><a href="{{ url_for('user_mgmt.add_user') }}" class="primary">Add New User</a></li>
+        <li><a href="{{ url_for('user_mgmt.manage_users') }}" class="primary">Manage Users</a></li>
+    </ul>
+
+    <h2>Manage Collections</h2>
+    <p>Here you can manage collections of potential invitees.</p>
+    <ul>
+        <li><a href="{{ url_for('create_collection') }}" class="primary">Create New Collection</a></li>
+        <li><a href="{{ url_for('manage_collections') }}" class="primary">Manage Collections</a></li>
+    </ul>
+
+    <h2>Potential Invites</h2>
+    {% if recent_collection %}
+        <ul>
+            <li><a href="{{ url_for('view_collection', collection_id=recent_collection[0]) }}" class="primary">{{ recent_collection[1] }}</a></li>
+        </ul>
+    {% else %}
+        <p>No collections available.</p>
+    {% endif %}
+    {% endif %}
+    
+    {% if current_user.is_elevated() %}
+    <h2>Settings</h2>
+    <p>Adjust the settings of the website here.</p>
+    {% endif %}
+    
+    <a href="{{ url_for('auth.logout') }}" class="primary">Logout</a>
+</section>
+{% endblock %}

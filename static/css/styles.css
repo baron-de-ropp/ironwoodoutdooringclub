@@ -1,0 +1,24 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    background-image: url('../images/lake_wallenpaupack.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+nav {
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 1rem;
+}
+
+.main-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    text-align: left;  /* Change text alignment to left */
+    max-width: 800px;  /* Limit the width of the content */
+    margin-left: auto;
+    margin-right: auto;
+}

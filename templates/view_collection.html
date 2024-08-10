@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="main-content">
+    <h1>{{ collection[0] }}</h1>
+    <a href="{{ url_for('admin') }}" class="primary">Return to Admin Dashboard</a>
+    <a href="{{ url_for('add_invitee', collection_id=collection_id) }}" class="primary">Add Invitee</a>
+    <p>You are tasked with approving or disapproving of all potential invites. If a single person disapproves, the invitee will be disqualified from being invited. All votes for approvals and disapprovals are anonymous to allow each current sitting member the right to express their opinion without concern of retribution.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Invitee Name</th>
+                <th>Approve</th>
+                <th>Disapprove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invitee in invitees %}
+            <tr>
+                <td>{{ invitee[1] }}</td>
+                <td>
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="invitee_id" value="{{ invitee[0] }}">
+                        <input type="hidden" name="vote" value="approve">
+                        <button type="submit" class="{% if votes.get(invitee[0]) == 'approve' %}primary{% else %}secondary{% endif %}">Approve</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="invitee_id" value="{{ invitee[0] }}">
+                        <input type="hidden" name="vote" value="disapprove">
+                        <button type="submit" class="{% if votes.get(invitee[0]) == 'disapprove' %}primary{% else %}secondary{% endif %}">Disapprove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

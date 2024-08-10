@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="main-content">
+    <h1>Manage Collections</h1>
+    <a href="{{ url_for('admin') }}" class="primary">Return to Admin Dashboard</a>
+    <a href="{{ url_for('create_collection') }}" class="primary">Create New Collection</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Collection Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for collection in collections %}
+            <tr>
+                <td>{{ collection[1] }}</td>
+                <td>
+                    <a href="{{ url_for('view_collection', collection_id=collection[0]) }}" class="primary">View</a>
+                    <a href="{{ url_for('remove_collection', collection_id=collection[0]) }}" class="primary">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

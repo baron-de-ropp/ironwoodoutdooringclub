@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="main-content">
+    <h1>Create New Collection</h1>
+    <a href="{{ url_for('admin') }}" class="primary">Return to Admin Dashboard</a>
+    <form method="POST">
+        <label for="name">Collection Name</label>
+        <input type="text" name="name" id="name" required>
+        <button type="submit" class="primary">Create Collection</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</section>
+{% endblock %}

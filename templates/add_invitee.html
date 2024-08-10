@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="main-content">
+    <h1>Add Invitee to Collection</h1>
+    <a href="{{ url_for('view_collection', collection_id=collection_id) }}" class="primary">Return to Collection</a>
+    <form method="POST">
+        <label for="name">Invitee Name</label>
+        <input type="text" name="name" id="name" required>
+        <button type="submit" class="primary">Add Invitee</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</section>
+{% endblock %}
